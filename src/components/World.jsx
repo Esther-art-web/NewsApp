@@ -5,7 +5,12 @@ class World extends Component {
     render() { 
         return ( 
             <div className='container'>
-                <h3>This page contains world news</h3>
+                <div className='row'>
+                    <h1>World News</h1>
+                </div>
+                <div className='row'>
+                    
+                </div>
             </div>
          );
     }
