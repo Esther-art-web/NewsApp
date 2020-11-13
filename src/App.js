@@ -15,6 +15,11 @@ import RenderPoliticsComponent from './components/RenderHomePage/RenderPoliticsC
 import RenderSportsComponent from './components/RenderHomePage/RenderSportsComponent';
 import RenderEntertainmentComponent from './components/RenderHomePage/RenderEntertainmentComponent';
 import { connect } from 'react-redux'
+import Business from './components/Business';
+import Health from './components/Health';
+import Tech from './components/Tech';
+import Axios from 'axios';
+
 
 // const mapStateToProps =(state)=>{
 //   return({
@@ -81,13 +86,31 @@ class App extends Component {
           entertainment:[],
           isLoading: true,
           error: null
+        },
+        {
+          id: 'BusinessPage',
+          business:[],
+          isLoading: true,
+          error: null
+        },
+        {
+          id: 'HealthPage',
+          health:[],
+          isLoading: true,
+          error: null
+        },
+        {
+          id: 'TechPage',
+          tech:[],
+          isLoading: true,
+          error: null
         }
     ]
     }
-    console.log(this.state.homePage)
+    
   }
    fetchHeadlines=()=>{
-    fetch("https://newsapi.org/v2/top-headlines?sources=bbc-news&sortBy=popularity&apiKey=25d513e86f054bd0b1c06fc615071ef5")
+    fetch("https://newsapi.org/v2/top-headlines?sources=cnn&sortBy=popularity&apiKey=25d513e86f054bd0b1c06fc615071ef5")
     .then(response=> response.json())
     .then((data)=>{
       
@@ -102,7 +125,6 @@ class App extends Component {
         this.setState({
             homePage },
             () => {
-              console.log(this.state.homePage)
             }
         );
       })
@@ -140,7 +162,7 @@ class App extends Component {
         this.setState({
             homePage },
             () => {
-              console.log(this.state.homePage)
+             
             }
         );
       })
@@ -176,11 +198,8 @@ class App extends Component {
            {...key}
          );
            this.setState({
-               homePage },
-               () => {
-                 console.log(this.state.homePage)
-               }
-           );
+               homePage 
+              });
          })
         
        .catch(error => {
@@ -213,10 +232,7 @@ class App extends Component {
           {...key}
         );
           this.setState({
-              homePage },
-              () => {
-                console.log(this.state.homePage)
-              }
+              homePage }
           );
         })
       
@@ -251,10 +267,7 @@ fetchEntertainment= () =>{
         {...key}
       );
         this.setState({
-            homePage },
-            () => {
-              console.log(this.state.homePage)
-            }
+            homePage }
         );
       })
     
@@ -275,53 +288,196 @@ fetchEntertainment= () =>{
     }  
     
     
-    fetchWorldPage= () =>{
-      fetch("https://newsapi.org/v2/everything?q=world&apiKey=25d513e86f054bd0b1c06fc615071ef5")
-       .then(response=> response.json())
-       .then((data)=>{
-       
-         const pageComponents= this.state.pageComponents.map(
-           key => key.id === 'WorldPage' ? {
-             ...key, 
-             world : data.articles,
-             isLoading: false
-           }: 
-           {...key}
-         );
-           this.setState({
-               pageComponents },
-               () => {
-                 console.log(this.state.pageComponents)
-               }
-           );
-         })
+  fetchWorldPage= () =>{
+    fetch("https://newsapi.org/v2/everything?q=world&apiKey=25d513e86f054bd0b1c06fc615071ef5")
+      .then(response=> response.json())
+      .then((data)=>{
+      
+        const pageComponents= this.state.pageComponents.map(
+          key => key.id === 'WorldPage' ? {
+            ...key, 
+            world : data.articles,
+            isLoading: false
+          }: 
+          {...key}
+        );
+          this.setState({
+              pageComponents },
+              () => {
+                
+              }
+          );
+        })
+      
+      .catch(error => {
+        const errorHandler= this.state.pageComponents.map(
+          key=> key.id === 'WorldPage'? {
+            ...key,
+            error ,
+            isLoading: false
+          }: {...key}
+        );
         
-       .catch(error => {
-         const errrorHandler= this.state.pageComponents.map(
-           key=> key.id === 'WorldPage'? {
-             ...key,
-             error ,
-             isLoading: false
-           }: {...key}
-         );
-         
-         this.setState({
-           pageComponents: errrorHandler
-       }) ;
-     })   
-   
-       }    
+        this.setState({
+          pageComponents: errorHandler
+      }) ;
+    })   
+  
+      }  
+fetchPoliticsPage= () =>{
+  fetch("https://newsapi.org/v2/everything?q=politics&apiKey=25d513e86f054bd0b1c06fc615071ef5")
+    .then(response=> response.json())
+    .then((data)=>{
+    
+      const pageComponents= this.state.pageComponents.map(
+        key => key.id === 'PoliticsPage' ? {
+          ...key, 
+          politics : data.articles,
+          isLoading: false
+        }: 
+        {...key}
+      );
+        this.setState({
+            pageComponents },
+            () => {
+              
+            }
+        );
+      })
+    
+    .catch(error => {
+      const errrorHandler= this.state.pageComponents.map(
+        key=> key.id === 'PoliticsPage'? {
+          ...key,
+          error ,
+          isLoading: false
+        }: {...key}
+      );
+      
+      this.setState({
+        pageComponents: errrorHandler
+    }) ;
+  })   
+
+}       
+fetchSportsPage= () =>{
+  fetch("https://newsapi.org/v2/everything?q=sports&apiKey=25d513e86f054bd0b1c06fc615071ef5")
+    .then(response=> response.json())
+    .then((data)=>{
+    
+      const pageComponents= this.state.pageComponents.map(
+        key => key.id === 'SportsPage' ? {
+          ...key, 
+          sports : data.articles,
+          isLoading: false
+        }: 
+        {...key}
+      );
+        this.setState({
+            pageComponents },
+            () => {
+              
+            }
+        );
+      })
+    
+    .catch(error => {
+      const errrorHandler= this.state.pageComponents.map(
+        key=> key.id === 'SportsPage'? {
+          ...key,
+          error ,
+          isLoading: false
+        }: {...key}
+      );
+      
+      this.setState({
+        pageComponents: errrorHandler
+    }) ;
+  })   
+
+}       
+fetchEntertainmentPage= () =>{
+  fetch("https://newsapi.org/v2/everything?q=entertainment&apiKey=25d513e86f054bd0b1c06fc615071ef5")
+    .then(response=> response.json())
+    .then((data)=>{
+    
+      const pageComponents= this.state.pageComponents.map(
+        key => key.id === 'EntertainmentPage' ? {
+          ...key, 
+          entertainment : data.articles,
+          isLoading: false
+        }: 
+        {...key}
+      );
+        this.setState({
+            pageComponents },
+            () => {
+              
+            }
+        );
+      })
+    
+    .catch(error => {
+      const errrorHandler= this.state.pageComponents.map(
+        key=> key.id === 'EntertainmentPage'? {
+          ...key,
+          error ,
+          isLoading: false
+        }: {...key}
+      );
+      
+      this.setState({
+        pageComponents: errrorHandler
+    }) ;
+  })   
+
+} 
+getBusinessPage=()=>{
+  Axios
+  .get("https://newsapi.org/v2/everything?q=business&apiKey=25d513e86f054bd0b1c06fc615071ef5")
+  .then(response => 
+    response.articles.map(
+      data => ({
+        title: `${data.title}`,
+        urlToImage : `${data.urlToImage}`,
+        description: `${data.description}`
+      })
+    ))
+    .then(business => {
+      var pageComponents= this.state.pageComponents.map(
+        key =>
+        key.id === 'BusinessPage' ? {...key, business, isLoading: false } : {...key}
+      )
+      this.setState({
+        pageComponents
+      },
+      console.log(this.state.pageComponents)
+      )
+    })
+    .catch(error =>{
+      var pageComponents= this.state.pageComponents.map(key =>
+        key.id === 'BusinessPage' ? 
+        ({...key, error, isLoading: false }) : ({...key})
+      )
+      this.setState({
+        pageComponents
+      })
+    })
+}      
 
   componentDidMount(){
-    console.log('rendered');
+  //  The sections in the home page
    this.fetchHeadlines();
    this.fetchWorld();
    this.fetchPolitics();
    this.fetchSports();
    this.fetchEntertainment();
-   console.log(this.state);
-
+  // Individual Page Components
    this.fetchWorldPage();
+   this.fetchPoliticsPage();
+   this.fetchSportsPage();
+   this.fetchEntertainmentPage();
+   this.getBusinessPage();
 }
  
 
@@ -337,39 +493,40 @@ fetchEntertainment= () =>{
           match= {match}  
             />  
       );
-      }
-      const RenderWorld=({ match })=>{
+    }
+    const RenderWorld=({ match })=>{
         return(
         <RenderWorldComponent 
             info={this.state.homePage.filter(key =>
-              key.id === 'homeWorld'
-            )}
+              key.id === 'homeWorld') || this.state.pageComponents.filter(key =>
+                key.id === 'WorldPage')}
             match= {match}  
               />  
         );
-        }
-        const RenderPolitics=({ match })=>{
+    }
+    const RenderPolitics=({ match })=>{
           return(
           <RenderPoliticsComponent 
               info={this.state.homePage.filter(key =>
-                key.id === 'homePolitics'
-              )}
+                key.id === 'homePolitics') || this.state.pageComponents.filter(key =>
+                  key.id === 'PoliticsPage')}
               match= {match}  
                 />  
           );
-          }  
-          const RenderSports=({ match })=>{
+    }  
+    const RenderSports=({ match })=>{
             return(
             <RenderSportsComponent 
                 info={this.state.homePage.filter(key =>
-                  key.id === 'homeSports'
-                )}
+                  key.id === 'homeSports') || this.state.homePage.filter(key =>
+                    key.id === 'SportsPage'
+                  )
+                }
                 match= {match}  
                   />  
             );
-            }  
-
-            const RenderEntertainment=({ match })=>{
+    }  
+    const RenderEntertainment=({ match })=>{
               return(
               <RenderEntertainmentComponent 
                   info={this.state.homePage.filter(key =>
@@ -378,7 +535,7 @@ fetchEntertainment= () =>{
                   match= {match}  
                     />  
               );
-              }  
+    }  
     return ( 
       <React.Fragment>
          <Header/>
@@ -394,11 +551,14 @@ fetchEntertainment= () =>{
            <Route path='/headlines/:title' component={RenderHeadLines}/>
            <Route exact path='/headlines' component={Headlines}/>
            <Route path='/politics/:title' component={RenderPolitics}/>
-           <Route exact path='/politics' component={Politics}/>
+           <Route exact path='/politics' component={()=> <Politics info={this.state.pageComponents.filter(page => page.id === 'PoliticsPage')[0]}/>}/>
            <Route path='/sports/:title' component={RenderSports}/>
-           <Route exact path='/sports' component={Sports}/>
+           <Route exact path='/sports' component={()=> <Sports info={this.state.pageComponents.filter(page => page.id === 'SportsPage')[0]}/>}/>
            <Route path='/entertainment/:title' component={RenderEntertainment}/>
-           <Route exact path='/entertainment' component={Entertainment}/>
+           <Route exact path='/entertainment' component={()=> <Entertainment info={this.state.pageComponents.filter(page => page.id === 'EntertainmentPage')[0]}/>}/>
+           <Route exact path ='/business' component ={()=> <Business info={this.state.pageComponents.filter(page => page.id === 'BusinessPage')[0]}/>}/>
+           <Route exact path ='/health' component ={()=> <Health/>}/>
+           <Route exact path ='/tech' component ={()=> <Tech/>}/>
            <Redirect to='/home'/>
          </Switch>
          <Footer/> 

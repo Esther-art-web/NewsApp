@@ -15,10 +15,10 @@ class RenderSportsComponent extends Component {
                     <div className= 'row row-content'>
                     <h1> { sports.title }</h1>
                         <img src={sports.urlToImage} width="100%"/>
-                        <div className='row'>
+                        <div className='row mt-5'>
                             {sports.content} 
                         </div>
-                        <p>Source: {sports.author}</p>
+                        <cite>Source: {sports.author}</cite>
                     </div>
                     
                 </div>)

@@ -20,10 +20,11 @@ class RenderHeadLinesComponent extends Component {
                     <div className= 'row row-content'>
                     <h1> { headLine.title }</h1>
                         <img src={headLine.urlToImage} width="100%"/>
-                        <div className='row'>
+                        <div className='row mt-5'>
                             {headLine.content} 
                         </div>
-                        <p>Source: {headLine.author}</p>
+                        
+                        <cite>Source: {headLine.author}</cite>
                     </div>
                     
                 </div>)

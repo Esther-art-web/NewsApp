@@ -16,10 +16,10 @@ class RenderWorldComponent extends Component {
                     <div className= 'row row-content'>
                     <h1> { world.title }</h1>
                         <img src={world.urlToImage} width="100%"/>
-                        <div className='row'>
+                        <div className='row mt-5'>
                             {world.content} 
                         </div>
-                        <p>Source: {world.author}</p>
+                        <cite>Source: {world.author}</cite>
                     </div>
                     
                 </div>)

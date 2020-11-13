@@ -14,10 +14,10 @@ class RenderHomePolitics extends Component {
                     <div className= 'row row-content'>
                     <h1> { politics.title }</h1>
                         <img src={politics.urlToImage} width="100%"/>
-                        <div className='row'>
+                        <div className='row mt-5'>
                             {politics.content} 
                         </div>
-                        <p>Source: {politics.author}</p>
+                        <cite>Source: {politics.author}</cite>
                     </div>
                     
                 </div>)
