@@ -20,6 +20,8 @@ import Health from './components/Health';
 import Tech from './components/Tech';
 import Axios from 'axios';
 import RenderBusinessComponent from './components/RenderHomePage/RenderBusinessComponent';
+import RenderHealthComponent from './components/RenderHomePage/RenderHealthComponent';
+import RenderTechComponent from './components/RenderHomePage/RenderTechComponent';
 
 
 // const mapStateToProps =(state)=>{
@@ -118,7 +120,7 @@ class App extends Component {
       const homePage= this.state.homePage.map(
         key => key.id === 'homeHeadLines' ? {
           ...key, 
-          headLines : data.articles.slice(0,5),
+          headLines : data.articles.slice(0,6),
           isLoading1: false
         }: 
         {...key}
@@ -155,7 +157,7 @@ class App extends Component {
       const homePage= this.state.homePage.map(
         key => key.id === 'homeWorld' ? {
           ...key, 
-          world : data.articles.slice(0,5),
+          world : data.articles.slice(0,6),
           isLoading2: false
         }: 
         {...key}
@@ -193,7 +195,7 @@ class App extends Component {
          const homePage= this.state.homePage.map(
            key => key.id === 'homePolitics' ? {
              ...key, 
-             politics : data.articles.slice(0,5),
+             politics : data.articles.slice(0,6),
              isLoading3: false
            }: 
            {...key}
@@ -227,7 +229,7 @@ class App extends Component {
         const homePage= this.state.homePage.map(
           key => key.id === 'homeSports' ? {
             ...key, 
-            sports : data.articles.slice(0,5),
+            sports : data.articles.slice(0,6),
             isLoading4: false
           }: 
           {...key}
@@ -262,7 +264,7 @@ fetchEntertainment= () =>{
       const homePage= this.state.homePage.map(
         key => key.id === 'homeEntertainment' ? {
           ...key, 
-          entertainment : data.articles.slice(0,5),
+          entertainment : data.articles.slice(0,6),
           isLoading5: false
         }: 
         {...key}
@@ -441,7 +443,9 @@ getBusinessPage=()=>{
       data => ({
         title: `${data.title}`,
         urlToImage : `${data.urlToImage}`,
-        description: `${data.description}`
+        content:`${data.content}`,
+        description: `${data.description}`,
+        author: `${data.author}`
       })
     ))
     .then(business => {
@@ -465,6 +469,73 @@ getBusinessPage=()=>{
       })
     })
 }      
+getHealthPage=()=>{
+  Axios
+  .get("https://newsapi.org/v2/everything?q=health&apiKey=25d513e86f054bd0b1c06fc615071ef5")
+  .then(response => 
+    response.data.articles.map(
+      data => ({
+        title: `${data.title}`,
+        urlToImage : `${data.urlToImage}`,
+        description: `${data.description}`,
+        content:`${data.content}`,
+        author: `${data.author}`
+      })
+    ))
+    .then(health => {
+      var pageComponents= this.state.pageComponents.map(
+        key =>
+        key.id === 'HealthPage' ? {...key, health, isLoading: false } : {...key}
+      )
+      this.setState({
+        pageComponents
+      },
+      console.log(this.state.pageComponents)
+      )
+    })
+    .catch(error =>{
+      var pageComponents= this.state.pageComponents.map(key =>
+        key.id === 'HealthPage' ? 
+        ({...key, error, isLoading: false }) : ({...key})
+      )
+      this.setState({
+        pageComponents
+      })
+    })
+}      
+getTechPage=()=>{
+  Axios
+  .get("https://newsapi.org/v2/everything?q=technology&apiKey=25d513e86f054bd0b1c06fc615071ef5")
+  .then(response => 
+    response.data.articles.map(
+      data => ({
+        title: `${data.title}`,
+        urlToImage : `${data.urlToImage}`,
+        description: `${data.description}`,
+        content:`${data.content}`,
+        author: `${data.author}`
+      })
+    ))
+    .then(tech => {
+      var pageComponents= this.state.pageComponents.map(
+        key =>
+        key.id === 'TechPage' ? {...key, tech, isLoading: false } : {...key}
+      )
+      this.setState({
+        pageComponents
+      },
+      )
+    })
+    .catch(error =>{
+      var pageComponents= this.state.pageComponents.map(key =>
+        key.id === 'TechPage' ? 
+        ({...key, error, isLoading: false }) : ({...key})
+      )
+      this.setState({
+        pageComponents
+      })
+    })
+}      
 
   componentDidMount(){
   //  The sections in the home page
@@ -479,6 +550,8 @@ getBusinessPage=()=>{
    this.fetchSportsPage();
    this.fetchEntertainmentPage();
    this.getBusinessPage();
+   this.getHealthPage();
+   this.getTechPage();
 }
  
 
@@ -548,7 +621,28 @@ getBusinessPage=()=>{
           match= {match}  
             />  
       );
+    }
+    const RenderHealth=({ match })=>{
+      return(
+      <RenderHealthComponent
+          info={this.state.pageComponents.filter(key =>
+            key.id === 'HealthPage'
+          )}
+          match= {match}  
+            />  
+      );
           }
+    const RenderTech=({ match })=>{
+      return(
+      <RenderTechComponent
+          info={this.state.pageComponents.filter(key =>
+            key.id === 'TechPage'
+          )}
+          match= {match}  
+            />  
+      );
+          }
+
     return ( 
       <React.Fragment>
          <Header/>
@@ -571,8 +665,10 @@ getBusinessPage=()=>{
            <Route exact path='/entertainment' component={()=> <Entertainment info={this.state.pageComponents.filter(page => page.id === 'EntertainmentPage')[0]}/>}/>
            <Route path='/business/:title' component={ RenderBusiness}/>
            <Route exact path ='/business' component ={()=> <Business info={this.state.pageComponents.filter(page => page.id === 'BusinessPage')[0]}/>}/>
-           <Route exact path ='/health' component ={()=> <Health/>}/>
-           <Route exact path ='/tech' component ={()=> <Tech/>}/>
+           <Route path='/health/:title' component={ RenderHealth}/>
+           <Route exact path ='/health' component ={()=> <Health info={this.state.pageComponents.filter(page => page.id === 'HealthPage')[0]}/>}/>
+           <Route path='/tech/:title' component={ RenderTech}/>
+           <Route exact path ='/tech' component ={()=> <Tech info={this.state.pageComponents.filter(page => page.id === 'TechPage')[0]}/>}/>
            <Redirect to='/home'/>
          </Switch>
          <Footer/> 
