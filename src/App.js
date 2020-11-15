@@ -499,7 +499,7 @@ getBusinessPage=()=>{
         return(
         <RenderWorldComponent 
             info={this.state.homePage.filter(key =>
-              key.id === 'homeWorld') || this.state.pageComponents.filter(key =>
+              key.id === 'homeWorld') && this.state.pageComponents.filter(key =>
                 key.id === 'WorldPage')}
             match= {match}  
               />  
@@ -509,7 +509,7 @@ getBusinessPage=()=>{
           return(
           <RenderPoliticsComponent 
               info={this.state.homePage.filter(key =>
-                key.id === 'homePolitics') || this.state.pageComponents.filter(key =>
+                key.id === 'homePolitics') && this.state.pageComponents.filter(key =>
                   key.id === 'PoliticsPage')}
               match= {match}  
                 />  
@@ -519,7 +519,7 @@ getBusinessPage=()=>{
             return(
             <RenderSportsComponent 
                 info={this.state.homePage.filter(key =>
-                  key.id === 'homeSports') || this.state.pageComponents.filter(key =>
+                  key.id === 'homeSports') && this.state.pageComponents.filter(key =>
                     key.id === 'SportsPage'
                   )
                 }
@@ -531,7 +531,7 @@ getBusinessPage=()=>{
               return(
               <RenderEntertainmentComponent 
                   info={this.state.homePage.filter(key =>
-                    key.id === 'homeEntertainment') || this.state.pageComponents.filter(key =>
+                    key.id === 'homeEntertainment') && this.state.pageComponents.filter(key =>
                       key.id === 'EntertainmentPage'
                   )
                 }
