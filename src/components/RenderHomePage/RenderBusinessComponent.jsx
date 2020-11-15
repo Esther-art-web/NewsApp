@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class RenderHomePolitics extends Component {
+class RenderBusinessComponent extends Component {
     state = {  }
     render() { 
         return ( 
@@ -8,16 +8,16 @@ class RenderHomePolitics extends Component {
                 {this.props.info.map(info =>{
 
                 return(
-                info.politics.map(politics => politics.title=== this.props.match.params.title? (
+                info.business.map(business => business.title=== this.props.match.params.title? (
                 
                 <div className='container'>
                     <div className= 'row row-content'>
-                    <h1> { politics.title }</h1>
-                        <img src={politics.urlToImage} width="100%" alt=''/>
+                    <h1> { business.title }</h1>
+                        <img src={business.urlToImage} width="100%" alt=''/>
                         <div className='row mt-5'>
-                            {politics.content} 
+                            {business.content} 
                         </div>
-                        <cite>Source: {politics.author}</cite>
+                        <cite>Source: {business.author}</cite>
                     </div>
                     
                 </div>)
@@ -35,4 +35,4 @@ class RenderHomePolitics extends Component {
     }
 }
  
-export default RenderHomePolitics;
+export default RenderBusinessComponent;

@@ -15,7 +15,7 @@ class RenderWorldComponent extends Component {
                 <div className='container'>
                     <div className= 'row row-content'>
                     <h1> { world.title }</h1>
-                        <img src={world.urlToImage} width="100%"/>
+                        <img src={world.urlToImage} width="100%" alt='' />
                         <div className='row mt-5'>
                             {world.content} 
                         </div>

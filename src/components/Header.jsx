@@ -12,7 +12,7 @@ class NavBar extends Component {
             isModalOpen: false,
             email: null
          }
-        const { isNavOpen }= this.state
+
     }
     
      
@@ -108,12 +108,12 @@ class NavBar extends Component {
                 </div>
             </Jumbotron>
             <Modal toggle={this.toggleModal} isOpen={this.state.isModalOpen} id='subscribeModal'>
-                <ModalHeader toggle={this.toggle}>
+                <ModalHeader >
                    Subscribe to receive notifications from us 
                   <span className='ml-5' onClick={this.toggleModal}> &times;</span> 
                 </ModalHeader>
                 <ModalBody >
-                    <Form >
+                    <Form onSubmit={()=>{alert('Your email address is '+ this.state.email);}} >
                         {/* <FormGroup>
                             <Label htmlFor= 'firstName'>
                                 FirstName:<Input type='text' name='firstName' />  

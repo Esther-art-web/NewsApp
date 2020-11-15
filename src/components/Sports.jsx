@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 class Sports extends Component {
     state = {  }
     cardStyle={
-        height:'250px',fontSize:'12px', overflow: 'hidden',whiteSpace: 'wrap',textOverflow: 'ellipsis',
+        height:'250px',fontSize:'12px', overflow: 'hidden',whiteSpace: 'wrap',textOverflow: 'ellipsis', marginTop: '10px'
     }
     render() { 
         const {sports, isLoading, error}= this.props.info;
@@ -23,10 +23,10 @@ class Sports extends Component {
                             <Col sm={6} md={4}>
                                 <Card style={this.cardStyle}>
                                     <Link to={`/sports/${title}`}>
-                                        <CardImg top width="100%" height='150px' src={urlToImage} alt={'alt'}/>
+                                        <CardImg top width="100%" height='150px' src={urlToImage} alt=''/>
                                         <CardBody>
-                                            <CardTitle style={{fontSize: '15px', fontWeight: 'bold'}}>{title}</CardTitle>
-                                            <CardText>{description}</CardText>
+                                            <CardTitle style={{fontSize: '15px', fontWeight: 'bold', lineHeight:'15px'}}>{title}</CardTitle>
+                                            <CardText>{description.length > 50 ?(description.slice(0,50)+ '...'):(description.slice(0,30)+ '...')}</CardText>
                                         </CardBody>
                                     </Link>
                                 </Card>
@@ -37,7 +37,7 @@ class Sports extends Component {
                     :
                     <div className='col-12'>
                         <div class='text-center'>
-                            <img src='assets/images/ajax-loader.gif'/>
+                            <img src='assets/images/ajax-loader.gif' alt=''/>
                         </div>
                     </div>
                 }

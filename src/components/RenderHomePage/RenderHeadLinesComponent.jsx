@@ -19,7 +19,7 @@ class RenderHeadLinesComponent extends Component {
                 <div className='container'>
                     <div className= 'row row-content'>
                     <h1> { headLine.title }</h1>
-                        <img src={headLine.urlToImage} width="100%"/>
+                        <img src={headLine.urlToImage} width="100%" alt='' />
                         <div className='row mt-5'>
                             {headLine.content} 
                         </div>

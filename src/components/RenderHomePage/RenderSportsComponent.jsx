@@ -14,7 +14,7 @@ class RenderSportsComponent extends Component {
                 <div className='container'>
                     <div className= 'row row-content'>
                     <h1> { sports.title }</h1>
-                        <img src={sports.urlToImage} width="100%"/>
+                        <img src={sports.urlToImage} width="100%" alt='' />
                         <div className='row mt-5'>
                             {sports.content} 
                         </div>

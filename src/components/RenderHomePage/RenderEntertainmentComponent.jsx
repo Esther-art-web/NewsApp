@@ -14,7 +14,7 @@ class RenderEntertainmentComponent extends Component {
                 <div className='container'>
                     <div className= 'row row-content'>
                     <h1> { entertainment.title }</h1>
-                        <img src={entertainment.urlToImage} width="100%"/>
+                        <img src={entertainment.urlToImage} width="100%" alt='' />
                         <div className='row mt-5'>
                             {entertainment.content} 
                         </div>

@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 class Business extends Component {
     state = {  }
     cardStyle={
-        height:'250px',fontSize:'12px', overflow: 'hidden',whiteSpace: 'wrap',textOverflow: 'ellipsis',
+        height:'300px',fontSize:'12px', overflow: 'hidden',whiteSpace: 'wrap',textOverflow: 'ellipsis',
+        marginTop: '10px'
     }
     render() { 
         const {business, isLoading, error}= this.props.info;
@@ -24,9 +25,9 @@ class Business extends Component {
                                 <Card style={this.cardStyle}>
                                     <Link to={`/business/${title}`}>
                                         <CardImg top width="100%" height='150px' src={urlToImage} alt={'alt'}/>
-                                        <CardBody>
-                                            <CardTitle style={{fontSize: '15px', fontWeight: 'bold'}}>{title}</CardTitle>
-                                            <CardText>{description}</CardText>
+                                        <CardBody >
+                                            <CardTitle style={{fontSize: '15px', fontWeight: 'bold', lineHeight:'15px'}}>{title}</CardTitle>
+                                            <CardText>{description.length > 50 ?(description.slice(0,50)+ '...'):(description.slice(0,30)+ '...')}</CardText>
                                         </CardBody>
                                     </Link>
                                 </Card>
@@ -37,7 +38,7 @@ class Business extends Component {
                     :
                     <div className='col-12'>
                         <div class='text-center'>
-                            <img src='assets/images/ajax-loader.gif'/>
+                            <img src='assets/images/ajax-loader.gif' alt=''/>
                         </div>
                     </div>
                 }

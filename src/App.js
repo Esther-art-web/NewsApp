@@ -19,6 +19,7 @@ import Business from './components/Business';
 import Health from './components/Health';
 import Tech from './components/Tech';
 import Axios from 'axios';
+import RenderBusinessComponent from './components/RenderHomePage/RenderBusinessComponent';
 
 
 // const mapStateToProps =(state)=>{
@@ -382,7 +383,7 @@ fetchSportsPage= () =>{
       })
     
     .catch(error => {
-      const errrorHandler= this.state.pageComponents.map(
+      const errorHandler= this.state.pageComponents.map(
         key=> key.id === 'SportsPage'? {
           ...key,
           error ,
@@ -391,7 +392,7 @@ fetchSportsPage= () =>{
       );
       
       this.setState({
-        pageComponents: errrorHandler
+        pageComponents: errorHandler
     }) ;
   })   
 
@@ -418,7 +419,7 @@ fetchEntertainmentPage= () =>{
       })
     
     .catch(error => {
-      const errrorHandler= this.state.pageComponents.map(
+      const errorHandler= this.state.pageComponents.map(
         key=> key.id === 'EntertainmentPage'? {
           ...key,
           error ,
@@ -427,7 +428,7 @@ fetchEntertainmentPage= () =>{
       );
       
       this.setState({
-        pageComponents: errrorHandler
+        pageComponents: errorHandler
     }) ;
   })   
 
@@ -436,7 +437,7 @@ getBusinessPage=()=>{
   Axios
   .get("https://newsapi.org/v2/everything?q=business&apiKey=25d513e86f054bd0b1c06fc615071ef5")
   .then(response => 
-    response.articles.map(
+    response.data.articles.map(
       data => ({
         title: `${data.title}`,
         urlToImage : `${data.urlToImage}`,
@@ -518,7 +519,7 @@ getBusinessPage=()=>{
             return(
             <RenderSportsComponent 
                 info={this.state.homePage.filter(key =>
-                  key.id === 'homeSports') || this.state.homePage.filter(key =>
+                  key.id === 'homeSports') || this.state.pageComponents.filter(key =>
                     key.id === 'SportsPage'
                   )
                 }
@@ -530,12 +531,24 @@ getBusinessPage=()=>{
               return(
               <RenderEntertainmentComponent 
                   info={this.state.homePage.filter(key =>
-                    key.id === 'homeEntertainment'
-                  )}
+                    key.id === 'homeEntertainment') || this.state.pageComponents.filter(key =>
+                      key.id === 'EntertainmentPage'
+                  )
+                }
                   match= {match}  
-                    />  
+                    />                 
               );
     }  
+    const RenderBusiness=({ match })=>{
+      return(
+      <RenderBusinessComponent
+          info={this.state.pageComponents.filter(key =>
+            key.id === 'BusinessPage'
+          )}
+          match= {match}  
+            />  
+      );
+          }
     return ( 
       <React.Fragment>
          <Header/>
@@ -556,6 +569,7 @@ getBusinessPage=()=>{
            <Route exact path='/sports' component={()=> <Sports info={this.state.pageComponents.filter(page => page.id === 'SportsPage')[0]}/>}/>
            <Route path='/entertainment/:title' component={RenderEntertainment}/>
            <Route exact path='/entertainment' component={()=> <Entertainment info={this.state.pageComponents.filter(page => page.id === 'EntertainmentPage')[0]}/>}/>
+           <Route path='/business/:title' component={ RenderBusiness}/>
            <Route exact path ='/business' component ={()=> <Business info={this.state.pageComponents.filter(page => page.id === 'BusinessPage')[0]}/>}/>
            <Route exact path ='/health' component ={()=> <Health/>}/>
            <Route exact path ='/tech' component ={()=> <Tech/>}/>

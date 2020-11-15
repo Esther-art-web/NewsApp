@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 
 class Main extends Component {
     cardStyle={
-        height:'250px',fontSize:'12px', overflow: 'hidden',whiteSpace: 'wrap',textOverflow: 'ellipsis',
+       height:'250px',fontSize:'12px', overflow: 'hidden',whiteSpace: 'wrap',textOverflow: 'ellipsis',
         
     }
    
@@ -25,20 +25,20 @@ class Main extends Component {
                 <div className='row row content'>
                     <h3>Top Headlines</h3>
                     <hr/>
-                    <Row>
+                    <Row >
                     {error1? <div className='col-12'>Error: {error1.message}</div> : <div></div>} 
                     {!isLoading1 ?(
                         headLines.map(headline=>{
                             const {title, description, urlToImage }= headline;
                             return(
                       
-                                <Col xs='6' md='4'  >
-                                    <Card className='mt-2' style={this.cardStyle}>
+                                <Col  xs='6' sm='6' md='4' >
+                                    <Card className='mt-2' xs='6' sm='6' md='4'  style={this.cardStyle}>
                                         <Link to={`/headlines/${title}`} >
-                                            <CardImg top width="100%" height='120px' src={urlToImage} />
-                                            <CardBody >
-                                                <CardTitle style={{fontSize: '15px', fontWeight: 'bold'}}>{title}</CardTitle>
-                                                <CardText>{description}</CardText>
+                                            <CardImg top width="100%" height='120px' src={urlToImage} alt='' />
+                                            <CardBody  >
+                                                <CardTitle style={{fontSize: '15px', fontWeight: 'bold', lineHeight:'15px'}}>{title}</CardTitle>
+                                                <CardText  >{description.length > 50 ?(description.slice(0,50)+ '...'):(description.slice(0,30)+ '...')}</CardText>
                             
                                             </CardBody>
                                             
@@ -53,7 +53,7 @@ class Main extends Component {
                     :
                     <div className='col-12'>
                         <div class='text-center'>
-                            <img src='assets/images/ajax-loader.gif'/>
+                            <img src='assets/images/ajax-loader.gif' alt=''/>
                         </div>
                     </div>
                    }
@@ -72,10 +72,10 @@ class Main extends Component {
                                 <Col xs='6' md='4'>
                                     <Card className='mt-2' style={this.cardStyle}>
                                         <Link to={`/world/${title}`} >
-                                            <CardImg top width="100%" height='120px' src={urlToImage} />
+                                            <CardImg top width="100%" height='120px' src={urlToImage} alt='' />
                                             <CardBody >
-                                                <CardTitle style={{fontSize: '15px', fontWeight: 'bold'}}>{title}</CardTitle>
-                                                <CardText>{description}</CardText>
+                                                <CardTitle style={{fontSize: '15px', fontWeight: 'bold', lineHeight: '15px'}}>{title}</CardTitle>
+                                                <CardText>{description.length > 50 ?(description.slice(0,50)+ '...'):(description.slice(0,30)+ '...')}</CardText>
                             
                                             </CardBody>
                                             
@@ -89,7 +89,7 @@ class Main extends Component {
                     ) : 
                     <div className='col-12'>
                         <div class='text-center'>
-                            <img src='assets/images/ajax-loader.gif'/>
+                            <img src='assets/images/ajax-loader.gif' alt='' />
                         </div>
                     </div>
                    }
@@ -109,11 +109,11 @@ class Main extends Component {
                                 <Col xs='6' md='4'>
                                     <Card className='mt-2' style={this.cardStyle}>
                                         <Link to={`/politics/${title}`} >
-                                            <CardImg top width="100%" height='120px' src={urlToImage} />
+                                            <CardImg top width="100%" height='120px' src={urlToImage} alt=''/>
                                             <CardBody >
                                                 
-                                                <CardTitle style={{fontSize: '15px', fontWeight: 'bold'}}>{title}</CardTitle>
-                                                <CardText>{description}</CardText>
+                                                <CardTitle style={{fontSize: '15px', fontWeight: 'bold', lineHeight: '15px'}}>{title}</CardTitle>
+                                                <CardText>{description.length > 50 ?(description.slice(0,50)+ '...'):(description.slice(0,30)+ '...')}</CardText>
                             
                                             </CardBody>
                                             
@@ -127,7 +127,7 @@ class Main extends Component {
                     ) : 
                     <div className='col-12'>
                         <div class='text-center'>
-                            <img src='assets/images/ajax-loader.gif'/>
+                            <img src='assets/images/ajax-loader.gif' alt=''/>
                         </div>
                     </div>
                    }
@@ -147,11 +147,11 @@ class Main extends Component {
                                 <Col xs='6' md='4'>
                                     <Card className='mt-2' style={this.cardStyle}>
                                         <Link to={`/sports/${title}`} >
-                                            <CardImg top width="100%" height='120px' src={urlToImage} />
+                                            <CardImg top width="100%" height='120px' src={urlToImage} alt='' />
                                             <CardBody >
                                                 
-                                                <CardTitle style={{fontSize: '15px', fontWeight: 'bold'}}>{title}</CardTitle>
-                                                <CardText>{description}</CardText>
+                                                <CardTitle style={{fontSize: '15px', fontWeight: 'bold', lineHeight: '15px'}}>{title}</CardTitle>
+                                                <CardText>{description.length > 50 ?(description.slice(0,50)+ '...'):(description.slice(0,30)+ '...')}</CardText>
                             
                                             </CardBody>
                                             
@@ -165,7 +165,7 @@ class Main extends Component {
                     ) : 
                     <div className='col-12'>
                         <div class='text-center'>
-                            <img src='assets/images/ajax-loader.gif'/>
+                            <img src='assets/images/ajax-loader.gif' alt=''/>
                         </div>
                     </div>
                    }
@@ -185,11 +185,11 @@ class Main extends Component {
                                 <Col xs='6' md='4'>
                                     <Card className='mt-2' style={this.cardStyle}>
                                         <Link to={`/entertainment/${title}`} >
-                                            <CardImg top width="100%" height='120px' src={urlToImage} />
+                                            <CardImg top width="100%" height='120px' src={urlToImage} alt='' />
                                             <CardBody >
                                                 
-                                                <CardTitle style={{fontSize: '15px', fontWeight: 'bold'}}>{title}</CardTitle>
-                                                <CardText>{description}</CardText>
+                                                <CardTitle style={{fontSize: '15px', fontWeight: 'bold', lineHeight:'15px'}}>{title}</CardTitle>
+                                                <CardText>{description.length > 50 ?(description.slice(0,50)+ '...'):(description.slice(0,30)+ '...')}</CardText>
                             
                                             </CardBody>
                                             
@@ -202,7 +202,7 @@ class Main extends Component {
                     ) : 
                     <div className='col-12'>
                         <div class='text-center'>
-                            <img src='assets/images/ajax-loader.gif'/>
+                            <img src='assets/images/ajax-loader.gif' alt=''/>
                         </div>
                     </div>
                    }
